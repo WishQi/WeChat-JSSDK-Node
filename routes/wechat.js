@@ -1,21 +1,22 @@
-var wechat = require('wechat');
+var router = require('koa-router')();
+const querystring = require('querystring');
+
 var verifyInfo = {  //验证信息
     token: 'WeChatMaoge',  // your wechat token
-    appid: 'DeveloperNotes',  // your wechat appid
     encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO'
 };
 
-//处理文本消息
-var handler = wechat(verifyInfo, wechat.text(wechatText));
+router.get('/verify', function *(next) {
+    var url = this.request.url;
+    var params = querystring.parse(url.split('?')[1]);
+    params.token = verifyInfo.token;
+    // console.log(params);
 
-module.exports = handler;
+    var signature = params.signature;
+    var echostr = params.echostr;
 
-function wechatText(message, req, res, next) {
-    var input = (message.Content || '').trim();
+    return echostr;
 
-    if (/你好/.test(input)) {
-        res.reply('Hello world (•̀ロ•́)و✧ ~~');
-    } else {
-        res.reply('(¬_¬)ﾉ 听不懂啦');
-    }
-}
+});
+
+module.exports = router;
