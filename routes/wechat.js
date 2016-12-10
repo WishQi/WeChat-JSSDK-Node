@@ -1,6 +1,6 @@
 var wechat = require('wechat');
 var verifyInfo = {  //验证信息
-    token: 'WeChatMoage',  // your wechat token
+    token: 'WeChatMaoge',  // your wechat token
     appid: 'DeveloperNotes',  // your wechat appid
     encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO'
 };
