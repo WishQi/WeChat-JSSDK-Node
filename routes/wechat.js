@@ -25,8 +25,10 @@ router.get('/verify', function *(next) {
     console.log(sha1result);
 
     if (sha1result == params.signature) {
+        console.log('true');
         return true;
     } else {
+        console.log('false');
         return false;
     }
 });
