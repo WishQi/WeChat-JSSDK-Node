@@ -26,7 +26,7 @@ router.get('/verify', function *(next) {
 
     if (sha1result == params.signature) {
         console.log('true');
-        return params.echostr;
+        this.response.body = params.echostr;
     } else {
         console.log('false');
         return false;
