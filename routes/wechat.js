@@ -1,4 +1,5 @@
 var router = require('koa-router')();
+var crypto = require('crypto');
 const querystring = require('querystring');
 
 var verifyInfo = {  //验证信息
@@ -9,14 +10,25 @@ var verifyInfo = {  //验证信息
 router.get('/verify', function *(next) {
     var url = this.request.url;
     var params = querystring.parse(url.split('?')[1]);
-    params.token = verifyInfo.token;
-    // console.log(params);
+    console.log(params);
 
-    var signature = params.signature;
-    var echostr = params.echostr;
+    var arr = [params.timestamp, params.nonce, verifyInfo.token].sort();
+    console.log(arr);
+    var str = '';
+    for (index in arr) {
+        str += arr[index];
+    }
+    console.log(str);
 
-    return echostr;
+    var sha1 = crypto.createHash('sha1');
+    var sha1result = sha1.update(str).digest('hex');
+    console.log(sha1result);
 
+    if (sha1result == params.signature) {
+        return true;
+    } else {
+        return false;
+    }
 });
 
 module.exports = router;
