@@ -7,6 +7,7 @@ var app = require('koa')()
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var wechat = require('./routes/wechat');
 
 // global middlewares
 app.use(views('views', {
@@ -29,8 +30,9 @@ app.use(require('koa-static')(__dirname + '/public'));
 // routes definition
 koa.use('/', index.routes(), index.allowedMethods());
 koa.use('/users', users.routes(), users.allowedMethods());
+koa.use('/wechat', users.routes(), users.allowedMethods());
 
-// mount root routes  
+// mount root routes
 app.use(koa.routes());
 
 app.on('error', function(err, ctx){
