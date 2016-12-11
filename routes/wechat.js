@@ -4,7 +4,13 @@ const querystring = require('querystring');
 
 var verifyInfo = {  //验证信息
     token: 'WeChatMaoge',  // your wechat token
-    encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO'
+    appid: 'wxf540ae16cc7b380d',
+    encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO',
+    signature: 'ce9689eca9b612cb679899e9e9ffe2bf5ea1a41b',
+    echostr: '6748768348601843615',
+    timestamp: '1481438358',
+    nonce: '53846050',
+
 };
 
 router.get('/verify', function *(next) {
