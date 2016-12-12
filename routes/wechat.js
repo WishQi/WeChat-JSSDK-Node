@@ -3,13 +3,13 @@ var crypto = require('crypto');
 const querystring = require('querystring');
 
 var verifyInfo = {  //验证信息
-    token: 'WeChatMaoge',  // your wechat token
+    token: 'WeChat',
     appid: 'wxf540ae16cc7b380d',
-    encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO',
-    signature: 'ce9689eca9b612cb679899e9e9ffe2bf5ea1a41b',
-    echostr: '6748768348601843615',
-    timestamp: '1481438358',
-    nonce: '53846050',
+    encodingAESKey: 'vg5ipPedss94MM3H2HNKQWV8TYwD2Supxjj8gWtyihX'
+    // signature: '',
+    // echostr: '',
+    // timestamp: '',
+    // nonce: '',
 
 };
 
