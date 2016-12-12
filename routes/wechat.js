@@ -6,7 +6,7 @@ var verifyInfo = {  //验证信息
     token: 'WeChatMaoge',  // your wechat token
     appid: 'wxf540ae16cc7b380d',
     appsecret: '3adf5088350e3f063f81ff838e872d1b',
-    encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO'
+    encodingAESKey: 'VsIy0UESAMpD6FS5DpDW4ccKIe9dXTtffysKLlmG0oO',
     signature: '728dfbd76b033b897ed14cdd4d0d9b6da0ee3d47',
     echostr: '2867392280809959121',
     timestamp: '1481551440',
