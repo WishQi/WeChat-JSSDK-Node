@@ -15,6 +15,7 @@ router.get('/', function *(next) {
     });
 
     var access_token = yield access_token_promise.then((res) => {
+        console.log(res.body);
         return res.body['access_token'];
     });
 
@@ -25,6 +26,7 @@ router.get('/', function *(next) {
     });
 
     var jsapi_ticket = yield jsapi_ticket_promise.then((res) => {
+        console.log(res.body);
         return res.body['ticket'];
     });
 
