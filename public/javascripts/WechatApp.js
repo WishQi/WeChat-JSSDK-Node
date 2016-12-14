@@ -7,6 +7,38 @@ var voice = {
     serverId: ''
 };
 
+function record() {
+    wx.stopRecord({
+        success: function (res) {
+            voice.localId = res.localId;
+            wx.uploadVoice({
+                localId: voice.localId,
+                success: function (res) {
+                    voice.serverId = res.serverId;
+                    $.ajax({
+                        url: 'http://www.use-mine.com/handleRecord',
+                        type: 'post',
+                        data: res,
+                        dataType: "json",
+                        success: function (data) {
+                            // alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                        },
+                        error: function (xhr, errorType, error) {
+                            // console.log(error);
+                        }
+                    })
+                    wx.startRecord()
+                }
+            });
+        },
+        fail: function (res) {
+            alert(JSON.stringify(res));
+        }
+    });
+}
+
+var timer;
+
 window.onload = function () {
     var Btn = document.getElementById('content');
     Btn.onclick = function() {
@@ -16,50 +48,22 @@ window.onload = function () {
                 cancel: function () {
                     alert('用户拒绝授权录音');
                 }
+                success: function() {
+                    timer = setInterval('record', 1000)
+                }
             });
         } else {
             Btn.value = "record";
+            clearInterval(timer);
+
             wx.stopRecord({
                 success: function (res) {
                     voice.localId = res.localId;
-                    wx.uploadVoice({
-                        localId: voice.localId,
-                        success: function (res) {
-                            alert('上传语音成功，serverId 为' + res.serverId);
-                            voice.serverId = res.serverId;
-                            wx.downloadVoice({
-                                serverId: voice.serverId,
-                                success: function (res) {
-                                    alert('下载语音成功，localId 为' + res.localId);
-                                    $.ajax({
-                                        url: 'http://www.use-mine.com/handleRecord',
-                                        type: 'post',
-                                        data: JSON.parse(res),
-                                        dataType: "json",
-                                        success: function (data) {
-                                            alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
-                                        },
-                                        error: function (xhr, errorType, error) {
-                                            console.log(error);
-                                        }
-                                    });
-                                    voice.localId = res.localId;
-                                }
-                            });
-                        }
-                    });
                 },
                 fail: function (res) {
-                    alert(JSON.stringify(res));
+                    alert(res);
                 }
             });
-            // if (voice.localId == '') {
-            //     alert('请先使用 startRecord 接口录制一段声音');
-            //     return;
-            // }
-            // wx.playVoice({
-            //     localId: voice.localId
-            // });
         }
     }
 };
