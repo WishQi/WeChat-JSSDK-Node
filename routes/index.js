@@ -46,4 +46,8 @@ router.get('/', function *(next) {
     });
 });
 
+router.post('/startRecord', function *(next) {
+    
+});
+
 module.exports = router;
