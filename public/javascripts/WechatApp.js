@@ -22,8 +22,27 @@ window.onload = function () {
             wx.stopRecord({
                 success: function (res) {
                     voice.localId = res.localId;
-                    wx.playVoice({
-                        localId: voice.localId
+                    // wx.playVoice({
+                    //     localId: voice.localId
+                    // });
+                    wx.uploadVoice({
+                        localId: voice.localId,
+                        success: function (res) {
+                            alert('上传语音成功，serverId 为' + res.serverId);
+                            voice.serverId = res.serverId;
+                            $.ajax({
+                                url: 'http://www.use-mine.com/handleRecord',
+                                type: 'post',
+                                data: JSON.stringify(res),
+                                dataType: "json",
+                                success: function (data) {
+                                    alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                                },
+                                error: function (xhr, errorType, error) {
+                                    console.log(error);
+                                }
+                            });
+                        }
                     });
                 },
                 fail: function (res) {

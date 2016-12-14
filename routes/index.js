@@ -46,8 +46,9 @@ router.get('/', function *(next) {
     });
 });
 
-router.post('/startRecord', function *(next) {
-    
+router.post('/handleRecord', function *(next) {
+    var data = this.request.body;
+    console.log(data);
 });
 
 module.exports = router;
