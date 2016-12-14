@@ -22,9 +22,6 @@ window.onload = function () {
             wx.stopRecord({
                 success: function (res) {
                     voice.localId = res.localId;
-                    // wx.playVoice({
-                    //     localId: voice.localId
-                    // });
                     wx.uploadVoice({
                         localId: voice.localId,
                         success: function (res) {
@@ -40,6 +37,14 @@ window.onload = function () {
                                 },
                                 error: function (xhr, errorType, error) {
                                     console.log(error);
+                                }
+                            });
+                            wx.downloadVoice({
+                                serverId: voice.serverId,
+                                success: function (res) {
+                                    alert('下载语音成功，localId 为' + res.localId);
+                                    console.log('downloadVoiceRes:', res);
+                                    voice.localId = res.localId;
                                 }
                             });
                         }
