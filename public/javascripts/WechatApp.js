@@ -22,20 +22,21 @@ window.onload = function () {
             wx.stopRecord({
                 success: function (res) {
                     voice.localId = res.localId;
+                    wx.playVoice({
+                        localId: voice.localId
+                    });
                 },
                 fail: function (res) {
                     alert(JSON.stringify(res));
                 }
-            }, function() {
-                if (voice.localId == '') {
-                    alert('请先使用 startRecord 接口录制一段声音');
-                    return;
-                }
-                wx.playVoice({
-                    localId: voice.localId
-                })
             });
-
+            // if (voice.localId == '') {
+            //     alert('请先使用 startRecord 接口录制一段声音');
+            //     return;
+            // }
+            // wx.playVoice({
+            //     localId: voice.localId
+            // });
         }
     }
 };
