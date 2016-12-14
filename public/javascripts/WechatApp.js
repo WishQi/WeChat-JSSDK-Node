@@ -49,7 +49,7 @@ window.onload = function () {
                     alert('用户拒绝授权录音');
                 },
                 success: function() {
-                    timer = setInterval('record()', 1000)
+                    timer = setInterval('record()', 10000)
                 }
             });
         } else {
