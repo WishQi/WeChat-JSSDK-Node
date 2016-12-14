@@ -43,7 +43,7 @@ window.onload = function () {
                                 serverId: voice.serverId,
                                 success: function (res) {
                                     alert('下载语音成功，localId 为' + res.localId);
-                                    console.log('downloadVoiceRes:', res);
+                                    alert(res);
                                     voice.localId = res.localId;
                                 }
                             });
