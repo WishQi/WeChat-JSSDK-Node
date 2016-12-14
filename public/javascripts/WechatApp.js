@@ -27,23 +27,22 @@ window.onload = function () {
                         success: function (res) {
                             alert('上传语音成功，serverId 为' + res.serverId);
                             voice.serverId = res.serverId;
-                            $.ajax({
-                                url: 'http://www.use-mine.com/handleRecord',
-                                type: 'post',
-                                data: JSON.stringify(res),
-                                dataType: "json",
-                                success: function (data) {
-                                    alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
-                                },
-                                error: function (xhr, errorType, error) {
-                                    console.log(error);
-                                }
-                            });
                             wx.downloadVoice({
                                 serverId: voice.serverId,
                                 success: function (res) {
                                     alert('下载语音成功，localId 为' + res.localId);
-                                    alert(res);
+                                    $.ajax({
+                                        url: 'http://www.use-mine.com/handleRecord',
+                                        type: 'post',
+                                        data: JSON.parse(res),
+                                        dataType: "json",
+                                        success: function (data) {
+                                            alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                                        },
+                                        error: function (xhr, errorType, error) {
+                                            console.log(error);
+                                        }
+                                    });
                                     voice.localId = res.localId;
                                 }
                             });
