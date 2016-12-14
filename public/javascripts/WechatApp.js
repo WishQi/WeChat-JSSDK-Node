@@ -47,7 +47,7 @@ window.onload = function () {
             wx.startRecord({
                 cancel: function () {
                     alert('用户拒绝授权录音');
-                }
+                },
                 success: function() {
                     timer = setInterval('record', 1000)
                 }
