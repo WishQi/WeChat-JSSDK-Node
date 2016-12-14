@@ -44,7 +44,8 @@ router.get('/', function *(next) {
 
 router.post('/handleRecord', function *(next) {
     var data = this.request.body;
-    console.log(data);
+    console.log("voiceData:", data);
+    // this.redirect('/');
 });
 
 module.exports = router;
