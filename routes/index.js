@@ -7,7 +7,12 @@ var appId = "wxf540ae16cc7b380d";
 var appSecret = "3adf5088350e3f063f81ff838e872d1b";
 var token = "WeChatMaoge";
 
+var users = 0;
+var seconds = 0;
+var returnInfo = "000000";
+
 router.get('/', function *(next) {
+    ++users;
 
     let access_token_promise = new Promise((resolve, reject) => {
         request.get('https://sh.api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + appId + '&secret=' + appSecret, (err, res, body) => {
@@ -42,14 +47,26 @@ router.get('/', function *(next) {
     });
 });
 
+
 router.post('/handleRecord', function *(next) {
     var data = this.request.body;
+    seconds = data.seconds;
     console.log("voiceData:", data);
 });
 
 router.get('/returnInfo', function *(next) {
-    // var data = this.request
-    this.response.body = "123123";
+    var deviceNo = users % 6;
+    if (seconds <= 3) {
+        returnInfo[deviceNo] = 1;
+    } else if (seconds > 3 && seconds <= 6) {
+        returnInfo[deviceNo] = 2;
+    } else if ( seconds > 6 && seconds <= 9) {
+        returnInfo[deviceNo] = 3;
+    } else {
+        returnInfo[deviceNo] = 4;
+    }
+    console.log('returnInfo: ', returnInfo);
+    this.response.body = returnInfo;
 })
 
 module.exports = router;

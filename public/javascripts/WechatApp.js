@@ -65,17 +65,12 @@ window.onload = function () {
                 success: function (res) {
                     voice.localId = res.localId;
                     res.seconds = seconds;
+                    seconds = 1;
                     $.ajax({
                         url: 'http://www.use-mine.com/handleRecord',
                         type: 'post',
                         data: res,
-                        dataType: "json",
-                        success: function (data) {
-                            // alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
-                        },
-                        error: function (xhr, errorType, error) {
-                            // console.log(error);
-                        }
+                        dataType: "json"
                     })
                 },
                 fail: function (res) {
