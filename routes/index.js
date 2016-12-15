@@ -56,13 +56,13 @@ router.post('/handleRecord', function *(next) {
     }
     console.log("deviceNo:", deviceNo);
     if (seconds <= 3) {
-        returnInfo.charAt($deviceNo) = '1';
+        returnInfo.replace($deviceNo, '1');
     } else if (seconds > 3 && seconds <= 6) {
-        returnInfo.charAt($deviceNo) = '2';
+        returnInfo.replace($deviceNo, '2');
     } else if ( seconds > 6 && seconds <= 9) {
-        returnInfo.charAt($deviceNo) = '3';
+        returnInfo.replace($deviceNo, '3');
     } else {
-        returnInfo.charAt($deviceNo) = '4';
+        returnInfo.replace($deviceNo, '4');
     }
     console.log('returnInfo: ', returnInfo);
 });
