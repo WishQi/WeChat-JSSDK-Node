@@ -8,7 +8,7 @@ var appSecret = "3adf5088350e3f063f81ff838e872d1b";
 var token = "WeChatMaoge";
 
 var users = 0;
-var returnInfo = "000000";
+var returnInfo = [0, 0, 0, 0, 0, 0];
 
 router.get('/', function *(next) {
     ++users;
@@ -56,15 +56,15 @@ router.post('/handleRecord', function *(next) {
     }
     console.log("deviceNo:", deviceNo);
     if (seconds <= 3) {
-        returnInfo.replace($deviceNo, '1');
+        returnInfo[deviceNo] = 1;
     } else if (seconds > 3 && seconds <= 6) {
-        returnInfo.replace($deviceNo, '2');
+        returnInfo[deviceNo] = 2;
     } else if ( seconds > 6 && seconds <= 9) {
-        returnInfo.replace($deviceNo, '3');
+        returnInfo[deviceNo] = 3;
     } else {
-        returnInfo.replace($deviceNo, '4');
+        returnInfo[deviceNo] = 4;
     }
-    console.log('returnInfo: ', returnInfo);
+    console.log('returnInfo: ', returnInfo.join(''));
 });
 
 router.get('/returnInfo', function *(next) {
