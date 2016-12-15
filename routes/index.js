@@ -69,7 +69,7 @@ router.post('/handleRecord', function *(next) {
 
 router.get('/returnInfo', function *(next) {
 
-    this.response.body = returnInfo;
+    this.response.body = returnInfo.join('');
 })
 
 module.exports = router;
