@@ -37,6 +37,12 @@ function record() {
     });
 }
 
+
+var seconds = 1;
+function timeCount() {
+    ++seconds;
+}
+
 var timer;
 
 window.onload = function () {
@@ -49,16 +55,28 @@ window.onload = function () {
                     alert('用户拒绝授权录音');
                 },
                 success: function() {
-                    timer = setInterval('record()', 10000)
+                    timer = setInterval('timeCount()', 1000)
                 }
             });
         } else {
             Btn.value = "record";
             clearInterval(timer);
-
             wx.stopRecord({
                 success: function (res) {
                     voice.localId = res.localId;
+                    res.seconds = seconds;
+                    $.ajax({
+                        url: 'http://www.use-mine.com/handleRecord',
+                        type: 'post',
+                        data: res,
+                        dataType: "json",
+                        success: function (data) {
+                            // alert('文件已经保存到七牛的服务器');//这回，我使用七牛存储
+                        },
+                        error: function (xhr, errorType, error) {
+                            // console.log(error);
+                        }
+                    })
                 },
                 fail: function (res) {
                     alert(res);
