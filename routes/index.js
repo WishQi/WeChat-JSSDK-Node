@@ -53,13 +53,13 @@ router.post('/handleRecord', function *(next) {
     var deviceNo = users % 6;
     console.log("deviceNo:", deviceNo);
     if (seconds <= 3) {
-        returnInfo.indexOf(deviceNo) = '1';
+        returnInfo.charAt(deviceNo) = '1';
     } else if (seconds > 3 && seconds <= 6) {
-        returnInfo.indexOf(deviceNo) = '2';
+        returnInfo.charAt(deviceNo) = '2';
     } else if ( seconds > 6 && seconds <= 9) {
-        returnInfo.indexOf(deviceNo) = '3';
+        returnInfo.charAt(deviceNo) = '3';
     } else {
-        returnInfo.indexOf(deviceNo) = '4';
+        returnInfo.charAt(deviceNo) = '4';
     }
     console.log('returnInfo: ', returnInfo);
 });
