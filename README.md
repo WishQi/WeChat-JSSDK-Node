@@ -1,4 +1,4 @@
-# WeChat_Node
+# WeChat-JSSDK-Node
 - 此教程内容：以node作为服务器接入微信公众号
 - 选用的node框架为koa
 
